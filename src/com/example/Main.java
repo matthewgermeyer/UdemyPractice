@@ -1,0 +1,69 @@
+package com.example;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+int[] myIntegers = getIntegers(5);
+int[] sorted = sortIntegers(myIntegers);
+printArray(sorted);
+
+    }
+
+    //getIntegers takes an int capacity, makes an int array of that size.
+    //Asks the user to enter that many integer values.
+    //For every index in that array, takes the scanner input and assigns it to those indexes.
+    //return array with its values.
+    public static int[] getIntegers(int capacity){
+        int[] array = new int[capacity];
+        System.out.println("Enter " + capacity + " Integer values: \r");
+        for (int i = 0; i < array.length; i++){
+            array[i] = scanner.nextInt();
+        }
+        return array;
+    }
+
+    //for each index in our int array, print out the index and its contents.
+    public static void printArray(int[] array){
+        for (int i = 0; i < array.length; i++){
+            System.out.println("Element " + i + " contents " + array[i]);
+        }
+    }
+
+
+    public static int[] sortIntegers(int[] array){
+
+        //Copy the array into a new array for sorting.
+
+        //Method #1
+//        int[] sortedArray = new int[array.length];
+//        for (int i =0; i < array.length; i++){
+//            sortedArray[i] = array[i];
+//        }
+
+        //Method #2
+        //Make a new array by calling Arrays.copyOf(arrayToCopy, length);
+        int[] sortedArray = Arrays.copyOf(array, array.length);
+
+        boolean flag = true;
+        int temp;
+        while (flag){
+            flag = false;
+            for (int i = 0; i < sortedArray.length-1; i++){
+               if (sortedArray[i] < sortedArray[i+1] ){
+                temp = sortedArray[i];
+                sortedArray[i] = sortedArray[i + 1];
+                sortedArray[i + 1] = temp;
+                flag = true;
+               }
+            }
+        }
+        return sortedArray;
+
+    }
+}
